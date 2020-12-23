@@ -7,7 +7,7 @@ function Home() {
             <h1 className="logo" style={{ fontSize: '64px', borderBottom: 'solid #5C9CD7 3px', marginBottom: '5px' }}>Stegno</h1>
             <p className="description" style={{ fontSize: '24px', marginTop: '5px', color: '#999595' }}>
                 Stegno is a project that enables you to create
-                steganographic images and decrypt it.
+                steganographic images and decode it.
             </p>
             <main style={{ border: 'solid #497FE9 3px', borderRadius: '1.5rem', width: '500px', height: '40vh', marginTop: '3rem' }}>
                 <div style={{ height: '100%' }}>
@@ -15,14 +15,13 @@ function Home() {
                     <div className="buttons" style={{ display: 'flex', justifyContent: 'space-evenly', marginTop: '4rem' }}>
                         <Link to='/login' style={{ textDecoration: 'none' }}>
                             <Button variant="contained" color="primary" style={{ fontSize: '1.2rem', backgroundColor: '#031722', borderRadius: '2rem' }}>
-                                Encrypt
+                                Encode
                         </Button>
                         </Link>
                         <Link to='/decrypt' style={{ textDecoration: 'none' }}>
                             <Button variant="contained" color="primary" style={{ fontSize: '1.2rem', backgroundColor: '#031722', borderRadius: '2rem' }}>
-                                Decrypt
+                                Decode
                         </Button>
-
                         </Link>
                     </div>
 
