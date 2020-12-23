@@ -1,12 +1,12 @@
 //imports
-// const fs = require('fs')
+const fs = require('fs')
 const express = require("express")
 const morgan = require("morgan")
 const app = express()
 const cors = require("cors")
 const helmet = require('helmet')
-// const { stegnography_encrypt, stegnography_decrypt } = require('./stegno_workings')
-// const { getBinaryByteArray, getPixelValue, getDecimalArray } = require('./stegno_workings/getDependency')
+const { stegnography_encrypt, stegnography_decrypt } = require('./stegno_workings')
+const { getBinaryByteArray, getPixelValue, getDecimalArray } = require('./stegno_workings/getDependency')
 
 //using middlewares
 app.use(morgan("common"));
@@ -23,16 +23,16 @@ app.get("/", (req, res) => {
 
 app.post("/encrypt", (req, res) => {
     const { emailId, password, message, to, image64 } = req.body
-    // const binaryArray = getBinaryByteArray(getPixelValue(image64))
-    // const newImageBitmap = stegnography_encrypt(binaryArray, message, message.trim().length)
-    // const decimalArray = getDecimalArray(newImageBitmap)
+    const binaryArray = getBinaryByteArray(getPixelValue(image64)).map(Number)
+    const newImageBitmap = stegnography_encrypt(binaryArray, message, message.trim().length)
+    const decimalArray = getDecimalArray(newImageBitmap)
 
-    //creates the steg-image
-    // const newImage = new Buffer.from(decimalArray)
-    // fs.writeFile('image/stegImage.png', newImage, (err) => {
-    //     if (err) throw err;
-    //     console.log('Steg-image created!')
-    // })
+    // creates the steg-image
+    const newImage = new Buffer.from(decimalArray)
+    fs.writeFile('image/stegImage.png', newImage, (err) => {
+        if (err) throw err;
+        console.log('Steg-image created!')
+    })
     res.json({
         status: 200,
         user: emailId
@@ -40,12 +40,11 @@ app.post("/encrypt", (req, res) => {
 })
 app.post("/decrypt", (req, res) => {
     const { messageLength, image64 } = req.body
-    // const binaryArray = getBinaryByteArray(getPixelValue(image64))
-    // const message = stegnography_decrypt(binaryArray, messageLength)
+    const binaryArray = getBinaryByteArray(getPixelValue(image64)).map(Number)
+    const message = stegnography_decrypt(binaryArray, messageLength)
     res.json({
         status: 200,
-        messageLength: messageLength,
-        // message: message
+        message: message
     })
 })
 app.use((req, res, next) => {
@@ -54,7 +53,7 @@ app.use((req, res, next) => {
     next(error);
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 app.listen(port, () => {
     console.log(`Listeninig at http://localhost:${port}`);
 });
