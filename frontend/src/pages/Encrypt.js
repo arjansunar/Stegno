@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { Input, InputLabel, FormControl, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom'
 import { inputContext } from '../context/InputContext';
+import axios from 'axios'
 function Encrypt() {
     const { inputValues, setinputValues } = useContext(inputContext);
     console.log(inputValues)
@@ -24,6 +25,20 @@ function Encrypt() {
                 reject(error)
             }
         })
+    }
+    const handlePostToServer = async (input) => {
+        try {
+            const response = await axios({
+                method: 'post',
+                url: 'http://localhost:4000/encrypt',
+                data: {
+                    ...input
+                }
+            })
+            console.log(response)
+        } catch (e) {
+            console.log(e)
+        }
     }
     return (
         <div>
@@ -59,17 +74,16 @@ function Encrypt() {
                     <input type="file" style={{ display: 'none' }} accept="image/png, image/jpeg" onChange={e => storeImageAsBase64(e)} />
                         Upload image
                 </label>
-                <Link to='/encrypt' style={{ textDecoration: 'none' }}>
-                    <Button variant="contained" color="primary" style={{
-                        fontSize: '1.2rem',
-                        backgroundColor: '#031722',
-                        borderRadius: '1rem',
-                        marginLeft: '22rem',
-                        top: '-5rem',
-                    }}>
-                        send
+                <Button variant="contained" color="primary" style={{
+                    fontSize: '1.2rem',
+                    backgroundColor: '#031722',
+                    borderRadius: '1rem',
+                    marginLeft: '22rem',
+                    top: '-5rem',
+                    width: '5rem'
+                }} onClick={() => handlePostToServer(inputValues)}>
+                    send
                 </Button>
-                </Link>
             </main>
 
         </div>

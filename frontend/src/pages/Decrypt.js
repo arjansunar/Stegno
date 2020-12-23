@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { Input, InputLabel, FormControl, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 function Decrypt() {
+    const [decodedMessage, setDecodedMessage] = useState('')
     const [decodeVal, setDecodeVal] = useState({
         messageLength: 0,
         image64: ''
@@ -27,6 +29,21 @@ function Decrypt() {
             }
         })
     }
+    const handlePostToServer = async (input) => {
+        try {
+            const response = await axios({
+                method: 'post',
+                url: 'http://localhost:4000/decrypt',
+                data: {
+                    ...input
+                }
+            })
+            setDecodedMessage(response.data.message)
+            console.log(response)
+        } catch (e) {
+            console.log(e)
+        }
+    }
     return (
         <div>
             <Link to='/' style={{ textDecoration: 'none', color: 'black' }}>
@@ -40,7 +57,8 @@ function Decrypt() {
                     <Input id="my-input" aria-describedby="my-helper-text" onChange={(e) => setDecodeVal({ ...decodeVal, messageLength: parseInt(e.target.value) })} />
                 </FormControl>
                 <p style={{ margin: '1rem 5rem', fontSize: '2rem', fontWeight: 'bold' }}>Message: </p>
-                <p style={{ margin: '0rem 5rem', fontSize: '1rem', color: '#999595', overflow: 'overlay', height: '10vh' }}>hello</p>
+                <p style={{ margin: '0rem 5rem', fontSize: '1rem', color: '#999595', overflow: 'overlay', height: '10vh' }}>{decodedMessage}</p>
+
                 <label style={{
                     border: '1px solid #ccc',
                     display: 'inline-block',
@@ -64,11 +82,10 @@ function Decrypt() {
                     marginLeft: '22rem',
                     top: '-12rem',
                     width: '7rem'
-                }}>
+                }} onClick={() => handlePostToServer(decodeVal)}>
                     decode
                 </Button>
             </main>
-
         </div >
     )
 }

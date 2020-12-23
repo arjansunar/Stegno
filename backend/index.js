@@ -35,7 +35,8 @@ app.post("/encrypt", (req, res) => {
     })
     res.json({
         status: 200,
-        user: emailId
+        user: emailId,
+        message: message
     })
 })
 app.post("/decrypt", (req, res) => {
