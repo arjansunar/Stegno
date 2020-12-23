@@ -11,7 +11,6 @@ function App() {
     emailId: '',
     password: '',
     message: '',
-    messageLength: 0,
     to: '',
     image64: ''
   })

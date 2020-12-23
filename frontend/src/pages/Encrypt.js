@@ -42,7 +42,7 @@ function Encrypt() {
                 <FormControl style={{ width: '50%', margin: '1rem 5rem' }}>
                     <InputLabel htmlFor="input">Message</InputLabel>
                     <Input id="input" aria-describedby="my-helper-text" onChange={(e) => {
-                        setinputValues({ ...inputValues, message: e.target.value, messageLength: e.target.value.length })
+                        setinputValues({ ...inputValues, message: e.target.value })
                     }} />
                 </FormControl>
                 <label style={{

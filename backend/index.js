@@ -27,6 +27,7 @@ app.post("/encrypt", (req, res) => {
     // const newImageBitmap = stegnography_encrypt(binaryArray, message, message.trim().length)
     // const decimalArray = getDecimalArray(newImageBitmap)
 
+    //creates the steg-image
     // const newImage = new Buffer.from(decimalArray)
     // fs.writeFile('image/stegImage.png', newImage, (err) => {
     //     if (err) throw err;
