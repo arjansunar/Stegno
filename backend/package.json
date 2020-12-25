@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./index.js"
+    "dev": "nodemon ./index.js",
+    "start": "node ./ index.js"
   },
   "keywords": [],
   "author": "Arjan Gahatraj Sunar",
@@ -17,5 +18,13 @@
     "morgan": "^1.10.0",
     "nodemailer": "^6.4.17",
     "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "atob": "^2.1.2",
+    "express.js": "^1.0.0",
+    "nodemailer": "^6.4.17",
+    "helmet": "^4.2.0",
+    "cors": "^2.8.5",
+    "morgan": "^1.10.0"
   }
 }

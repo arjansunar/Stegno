@@ -8,12 +8,10 @@ function Decrypt() {
         messageLength: 0,
         image64: ''
     })
-    console.log(decodeVal)
     const storeImageAsBase64 = async (e) => {
         const file = e.target.files[0]
         const base64Image = await convertTobase64(file)
         const base64Data = base64Image.split(',')[1]
-        console.log(base64Data)
 
         setDecodeVal({ ...decodeVal, image64: base64Data })
     }
@@ -33,7 +31,7 @@ function Decrypt() {
         try {
             const response = await axios({
                 method: 'post',
-                url: 'http://localhost:4000/decrypt',
+                url: 'https://stegno-project.herokuapp.com/decrypt',
                 data: {
                     ...input
                 }

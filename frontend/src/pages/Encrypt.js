@@ -5,12 +5,10 @@ import { inputContext } from '../context/InputContext';
 import axios from 'axios'
 function Encrypt() {
     const { inputValues, setinputValues } = useContext(inputContext);
-    console.log(inputValues)
     const storeImageAsBase64 = async (e) => {
         const file = e.target.files[0]
         const base64Image = await convertTobase64(file)
         const base64Data = base64Image.split(',')[1]
-        console.log(base64Data)
 
         setinputValues({ ...inputValues, image64: base64Data })
     }
@@ -30,7 +28,7 @@ function Encrypt() {
         try {
             const response = await axios({
                 method: 'post',
-                url: 'http://localhost:4000/encrypt',
+                url: 'https://stegno-project.herokuapp.com/encrypt',
                 data: {
                     ...input
                 }
