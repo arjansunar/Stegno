@@ -1,5 +1,6 @@
 //imports
 const fs = require('fs')
+const nodemailer = require("nodemailer");
 const express = require("express")
 const morgan = require("morgan")
 const app = express()
@@ -32,12 +33,45 @@ app.post("/encrypt", (req, res) => {
     fs.writeFile('image/stegImage.png', newImage, (err) => {
         if (err) throw err;
         console.log('Steg-image created!')
+        console.log("email:", emailId, "password: ", password)
+        const sender = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: emailId + "",
+                pass: password + "",
+            }
+        });
+
+        const mail = {
+            from: emailId,
+            to: to,
+            subject: 'Message using stegno',
+            text: `Check the attachment for the image\n Message Length: ${message.trim().length}`,
+            attachments: [
+                {
+                    filename: 'stegImage.png',
+                    path: 'image/stegImage.png',
+                    cid: 'uniq-stegno.png'
+                }
+            ]
+        };
+
+        sender.sendMail(mail, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent successfully: '
+                    + info.response);
+                res.json({
+                    status: 200,
+                    message: 'message sent!'
+                })
+            }
+        });
     })
-    res.json({
-        status: 200,
-        user: emailId,
-        message: message
-    })
+
+
+
 })
 app.post("/decrypt", (req, res) => {
     const { messageLength, image64 } = req.body
