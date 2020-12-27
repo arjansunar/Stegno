@@ -1,1 +1,1 @@
-A project to create a online UI to provid a stegnography servic and send images through email.
+A project to create an online UI to provide a stegnography service and send images through email.
