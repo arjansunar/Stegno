@@ -5,7 +5,6 @@ import { inputContext } from '../context/InputContext';
 function Login() {
 
     const { inputValues, setinputValues } = useContext(inputContext);
-    console.log(inputValues)
     return (
         <div>
             <Link to='/' style={{ textDecoration: 'none', color: 'black' }}>

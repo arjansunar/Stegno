@@ -18,17 +18,16 @@ const getBinaryIn8bitFormat = (binaryArray) => {
   }
   return binary8bits
 }
-// const messageLimit = 10 //number of characters in the message
+
 const stegnography_encrypt = (imageBitmap, message, messageLimit) => {
   const messageArray = getMessageArray(message)
   const messageBitmap = getBinaryIn8bitFormat(getBinaryByteArray(messageArray))
   const totalBinary = messageBitmap.join('').split('').map(Number) //converting to a linear binary array 
   for (let i = 0; i < messageLimit * 8; i++) {
-    //+24 is to skip the format data
-    let lastBit = parseInt(imageBitmap[i + 24].toString().charAt(imageBitmap[i + 24].length - 1))
+    let lastBit = parseInt(imageBitmap[imageBitmap.length - 1 - i].toString().charAt(imageBitmap[imageBitmap.length - 1 - i].length - 1))
     if (lastBit !== totalBinary[i]) {
       lastBit = totalBinary[i]
-      imageBitmap[i + 24] = parseInt(imageBitmap[i + 24].toString().substr(0, imageBitmap[0].length - 2) + lastBit)
+      imageBitmap[imageBitmap.length - 1 - i] = parseInt(imageBitmap[imageBitmap.length - 1 - i].toString().substr(0, imageBitmap[0].length - 2) + lastBit)
     }
   }
   return imageBitmap
@@ -37,8 +36,7 @@ const stegnography_encrypt = (imageBitmap, message, messageLimit) => {
 const stegnography_decrypt = (imageBitmap, messageLimit) => {
   const messageBinary = []
   for (let i = 0; i < messageLimit * 8; i++) {
-    //+24 is to skip the format data
-    const lastBit = parseInt(imageBitmap[i + 24].toString().charAt(imageBitmap[i + 24].length - 1))
+    const lastBit = parseInt(imageBitmap[imageBitmap.length - 1 - i].toString().charAt(imageBitmap[imageBitmap.length - 1 - i].length - 1))
     messageBinary.push(lastBit)
   }
   let message = '';
