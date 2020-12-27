@@ -28,8 +28,7 @@ function Encrypt() {
         try {
             const response = await axios({
                 method: 'post',
-                // url: 'https://stegno-project.herokuapp.com/encrypt',
-                url: 'http://localhost:4000/encrypt',
+                url: 'https://stegno-project.herokuapp.com/encrypt',
                 data: {
                     ...input
                 }
