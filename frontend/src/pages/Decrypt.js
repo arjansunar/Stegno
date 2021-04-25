@@ -31,7 +31,8 @@ function Decrypt() {
         try {
             const response = await axios({
                 method: 'post',
-                url: 'https://stegno-project.herokuapp.com/decrypt',
+                // url: 'https://stegno-project.herokuapp.com/decrypt',
+                url: 'http://localhost:4000/decrypt',
                 data: {
                     ...input
                 }

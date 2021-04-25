@@ -23,6 +23,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/encrypt", (req, res) => {
+    req.header('User-Agent')
     const { emailId, password, message, to, image64 } = req.body
     const binaryArray = getBinaryByteArray(getPixelValue(image64)).map(Number)
     const newImageBitmap = stegnography_encrypt(binaryArray, message, message.trim().length)

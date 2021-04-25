@@ -6,6 +6,7 @@ import Encrypt from './pages/Encrypt';
 import Decrypt from './pages/Decrypt';
 import Login from './pages/Login';
 import { inputContext } from './context/InputContext'
+
 function App() {
   const [inputValues, setinputValues] = useState({
     emailId: '',

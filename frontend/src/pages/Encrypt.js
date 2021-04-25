@@ -3,6 +3,7 @@ import { Input, InputLabel, FormControl, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom'
 import { inputContext } from '../context/InputContext';
 import axios from 'axios'
+
 function Encrypt() {
     const { inputValues, setinputValues } = useContext(inputContext);
     const storeImageAsBase64 = async (e) => {
@@ -28,7 +29,8 @@ function Encrypt() {
         try {
             const response = await axios({
                 method: 'post',
-                url: 'https://stegno-project.herokuapp.com/encrypt',
+                // url: 'https://stegno-project.herokuapp.com/encrypt',
+                url: 'http://localhost:4000/encrypt',
                 data: {
                     ...input
                 }

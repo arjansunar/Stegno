@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "concurrently": "^6.0.2"
+  },
+  "name": "stegno",
+  "description": "A project to create an online UI to provide a stegnography service and send images through email.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "client": "cd frontend && npm start",
+    "server": "cd backend && npm run dev",
+    "start": "concurrently \"npm run client\" \"npm run server\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arjansunar/Stegno.git"
+  },
+  "keywords": [
+    "Steganography",
+    "image",
+    "steganography"
+  ],
+  "author": "Arjan Sunar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arjansunar/Stegno/issues"
+  },
+  "homepage": "https://github.com/arjansunar/Stegno#readme"
+}
